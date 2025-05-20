@@ -26,16 +26,18 @@ auth()->user()->todos()->create($request->only('title', 'description'));
         return redirect()->route('todos.index');
     }
 
-  public function update(Request $request, Todo $todo)
+public function update(Request $request, Todo $todo)
 {
     $request->validate([
         'title' => 'required',
-        'description' => 'nullable|string'
+        'description' => 'nullable|string',
+        'completed' => 'boolean'
     ]);
 
     $todo->update([
         'title' => $request->title,
         'description' => $request->description,
+        'completed' => $request->has('completed') ? $request->completed : $todo->completed,
     ]);
 
     return redirect()->route('todos.index');

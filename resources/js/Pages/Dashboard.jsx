@@ -2,6 +2,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 export default function Dashboard() {
+    const handleLogout = () => {
+    Inertia.post(route('logout'));
+  };
+
     return (
         <AuthenticatedLayout
             header={
@@ -20,6 +24,12 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
+                   <button
+        onClick={handleLogout}
+        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow"
+      >
+        Logout
+      </button>
             </div>
         </AuthenticatedLayout>
     );
